@@ -1,0 +1,32 @@
+{
+    "name": "revue",
+    "version": "0.0.1",
+    "description": "A library for bridging React components to Vue",
+    "author": "Cyandev <unixzii@gmail.com>",
+    "main": "dist/index.js",
+    "scripts": {
+        "dev": "vite dev",
+        "build:example": "vite build"
+    },
+    "license": "MIT",
+    "devDependencies": {
+        "@nextui-org/react": "^1.0.0-beta.13",
+        "@rollup/plugin-typescript": "^11.1.2",
+        "@types/invariant": "^2.2.35",
+        "@types/react": "^18.2.15",
+        "@types/react-dom": "^18.2.7",
+        "@typescript-eslint/eslint-plugin": "^6.0.0",
+        "@typescript-eslint/parser": "^6.0.0",
+        "@vitejs/plugin-vue": "^4.2.3",
+        "eslint": "^8.44.0",
+        "eslint-plugin-vue": "^9.15.1",
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0",
+        "rollup": "^3.26.2",
+        "vite": "^4.4.4",
+        "vue": "^3.3.4"
+    },
+    "dependencies": {
+        "invariant": "^2.2.4"
+    }
+}
