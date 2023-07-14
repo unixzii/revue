@@ -12,7 +12,7 @@ A library for bridging React components to Vue.
 
 ## Getting Started
 
-First, define the bridge component:
+First, define the bridge component (e.g. in `button.ts`):
 
 ```typescript
 import { h } from 'vue';
@@ -42,7 +42,7 @@ Then you can use your favorite React component in any Vue component:
 </template>
 
 <script lang="ts" setup>
-import Button from './button';
+import Button from './button';  // Import the bridged component.
 
 function sayHello() {
     console.log('Hello, world!');
