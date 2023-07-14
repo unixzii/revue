@@ -17,7 +17,7 @@ First, define the bridge component:
 ```typescript
 import { h } from 'vue';
 import { Button } from '@nextui-org/react';
-import { defineReactComponent } from '../src/index';
+import { defineReactComponent } from 'revue';
 
 export default defineReactComponent(Button, {
     onClick: Function,
