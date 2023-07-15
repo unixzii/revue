@@ -1,32 +1,44 @@
 <template>
-  <div>
-    <h1>Counter: {{ counter }}</h1>
     <NextUIProvider>
-      <div style="width: 300px; margin: 12px auto;">
-        <Progress :value="Math.min(counter * 10, 100)" />
-      </div>
-      <div style="display: flex; gap: 8px; justify-content: center;">
-        <Button :onClick="increase">Inc</Button>
-        <Button :onClick="decrease" v-if="counter > 0">Dec</Button>
-      </div>
-    </NextUIProvider>
-  </div>
+        <div style="width: 480px; margin: 0 auto; padding: 64px 0;">
+        <h1 style="text-align: center;">Timer</h1>
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+            <TimerComponent v-for="timer in timers" :key="timer.id" :timer="timer" />
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 32px;">
+            <Input label="Duration (s)" type="number" :value="duration" :onChange="onDurationChange" />
+            <Button :onClick="startTimer">Start</Button>
+        </div>
+    </div>
+  </NextUIProvider>
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue';
+import { ref, reactive } from 'vue';
+import TimerComponent from './Timer.vue';
 import NextUIProvider from './next-ui-provider';
 import Button from './button';
-import Progress from './progress';
+import Input from './input';
+import { formatTime } from './utils';
+import { type Timer } from './timer';
 
-const counter = ref(0);
+const duration = ref(0);
+const timers: Timer[] = reactive([]);
+let id = 0;
 
-function increase() {
-    counter.value += 1;
+function onDurationChange(e: InputEvent) {
+    duration.value = +((e.target as HTMLInputElement)?.value);
 }
 
-function decrease() {
-    counter.value -= 1;
+function startTimer() {
+    const curId = ++id;
+    const durationValue = duration.value;
+    timers.push({
+        id: curId,
+        title: formatTime(durationValue),
+        remain: durationValue,
+        total: durationValue
+    });
 }
 </script>
 
@@ -35,8 +47,6 @@ function decrease() {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 </style>

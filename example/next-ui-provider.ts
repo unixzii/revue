@@ -1,6 +1,6 @@
 import { NextUIProvider } from '@nextui-org/react';
-import { defineReactContextComponent } from '../src/index';
+import { defineReactComponent } from '../src/index';
 
-export default defineReactContextComponent(NextUIProvider, {
+export default defineReactComponent(NextUIProvider, {
     theme: String
 }, {});
