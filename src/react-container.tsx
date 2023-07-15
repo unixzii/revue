@@ -1,4 +1,4 @@
-import { FC, ReactNode, ReactElement, Fragment, useEffect, useReducer, cloneElement } from 'react';
+import { type FC, type ReactNode, Fragment, useEffect, useReducer } from 'react';
 import { reactive } from 'vue';
 import invariant from 'invariant';
 
@@ -40,11 +40,11 @@ export function createContainer() {
 
 type RevueReactContainerProps = {
     container: IRevueContainer,
-    contextProvider?: ReactElement
+    children?: (children?: ReactNode) => ReactNode,
 };
 
 export const RevueReactContainer: FC<RevueReactContainerProps> = (props) => {
-    const { container, contextProvider } = props;
+    const { container, children } = props;
 
     type State = {
         nodeMap: Record<number, ReactNode>,
@@ -103,13 +103,13 @@ export const RevueReactContainer: FC<RevueReactContainerProps> = (props) => {
         };
     }, [container, update, nextNodeId]);
 
-    const children = nodes.map(i => (
+    const attachedChildren = nodes.map(i => (
         <Fragment key={`node-${i}`}>{nodeMap[i]}</Fragment>
     ));
 
-    if (!contextProvider) {
-        return <>{children}</>;
+    if (!children) {
+        return <>{attachedChildren}</>;
     }
 
-    return cloneElement(contextProvider, undefined, children);
+    return children(attachedChildren);
 };
